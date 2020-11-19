@@ -1,0 +1,136 @@
+
+
+{% extends "web/views/post.html" %}
+{% block posts %}
+
+
+
+
+{% for post in posts %}
+<div class="card m-4" style="width: 400px; height:fit-content;">
+  <div class="card-body">
+    <h4>{{post.title|slice:"0:26" }}</h4>
+    <div
+      class="image-container d-flex flex-column justify-content-center"
+    >
+      <a href='{{post.get_absolute_url}}' >
+        <img
+          src="{{post.image}}"
+          alt=""
+          width="300"
+          height="300"
+        />
+      </a>
+    </div>
+    <div id="content-post-preview" class="" style="text-align: left">
+      <div
+        class="communityRating__starsWrapper communityRating__starsWrapper--medium"
+        data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0"
+      >
+      <div
+          class="communityRating__stars communityRating__stars--medium"
+          id='{{ post.title }}Star'
+          aria-label="Rated {{ post.pointMedia }} of 5"
+          data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0.0"
+        ></div>
+        
+      </div>
+      <script> document.getElementById(`{{post.title}}Star`).style.width = `{{post.pointMediaPercent}}%` </script>
+   
+      <div id="add-info-lib-body">
+  
+        <p>
+          {{ post.pointMedia }} · {{ post.pointCount }} Puntuaciones · Author:
+          <a style='color:black'href="?author={{ forloop.counter }}">
+            <strong> {{post.author}} </strong> 
+
+        </a> · Publicado: {{post.publisher}} {{post.year}}· Pais
+          Origen: {{post.country}}
+        </p>
+      </div>
+      <p>
+        <strong>Descripcion: </strong>
+        {{post.previewContent}}
+      </p>
+      <legend class="border-bottom mb-4"></legend>
+      <a href='{{post.get_absolute_url}}' type="button" class="pl-auto m-1 btn btn-dark">
+        Ver más
+      </a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+
+
+
+<div >
+  {% if is_paginated %}
+ 
+
+  <nav class="" aria-label="..." >
+      <ul class="pagination m-auto" style="width: fit-content;">
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="page-link active" href="?page={{page_obj.previous_page_number}}" tabindex="-1" >Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+        </li>
+
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+      
+          {% if page_obj.number == num %}
+          <li class="page-item active" >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+
+          {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3' %}
+          <li class="page-item " >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+          {% endif %}
+        {% endfor %}
+
+
+        {% if page_obj.has_next %}
+     <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        </li>
+
+        {% endif %}
+      </ul>
+    </nav>
+
+    {% endif %}
+  </div>
+
+
+      <script>
+    window.onload = function() {
+    document.querySelector("#search-author").innerHtml = "<option> hola </option>";
+
+    
+    console.log('hola')
+    const API = 'http://127.0.0.1:8000/api/'
+    axios.get(`${API}gen/`)
+    .then(response => {
+            console.log(response.data);
+            const data = response.data;
+            data.forEach(x => {
+            console.log('hola' + x.nameGen);
+
+            });
+    })
+    .catch(error => console.error('On get student error', error))
+    }
+  </script> 
+
+
+
+
+  {% endblock posts %}

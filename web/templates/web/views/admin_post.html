@@ -1,0 +1,48 @@
+
+{% extends "users/profile.html" %}
+{% block title %} admin post {% endblock %}
+{% block content-profile %}
+<div id='admin-menu'>
+  {% load static %}
+<ul class="nav nav-tabs" style="height:50px;  margin: 14px"> 
+
+  <li class="nav-item dropdown">
+    <a name='admin_post' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Libros</a>
+    <div class="dropdown-menu">
+      <a name='admin_post/newpost'  class="nav-link " href="{% url 'add_post' %}">Agregar</a>
+      <a name='admin_post/posts' class="nav-link" href="{% url 'admin_post' %}">Administrar</a>
+
+  </li>
+  <li class="nav-item dropdown">
+    <a name='admin_author' class="nav-link dropdown-toggle disabled" href="#" tabindex="-1" aria-disabled="true" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autores</a>
+    <div class="dropdown-menu">
+
+
+  </li>
+  
+  <li class="nav-item dropdown">
+    <a name='admin_author' class="nav-link dropdown-toggle disabled" href="#" tabindex="-1" aria-disabled="true" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Generos</a>
+    <div class="dropdown-menu">
+
+
+  </li>
+  
+    </ul>
+    <script>
+    let pathName = window.location.pathname
+    pathName = pathName.substring(1 , 11 ) 
+    let aLi =   document.querySelector(`ul li a[name="${pathName}"]`);
+    console.log(pathName)
+    if(aLi){
+      aLi.className =  'nav-link dropdown-toggle active';
+    }
+
+    </script>
+{% block profile-cont %}{% endblock %}
+
+</div>
+{% endblock content-profile %}
+
+
+
+

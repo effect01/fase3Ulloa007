@@ -1,0 +1,68 @@
+
+{% extends "web/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div
+id="profile-body"
+  class=""
+  style="background: #fcffff;"
+>
+  <div class="row row-cols-2">
+    <div id="menu-profile" class="col-3 card-body">
+      <div class="foto-profile"  >
+
+        <img class='w-100 h-100 rounded-circle'src='{{ user.profile.image.url }}'/>
+      </div>
+      <h3 class='name-profile'  >{{  user.username.capitalize|slice:"0:12" }}</h3>
+      <div id="submenu-profile" class="list-group">
+        <ul>
+          <a
+          name='profile'
+            class="list-group-item list-group-item-action list-group-item-info"
+            href='{% url "Booklary-profile"%}'
+          >
+            Perfil
+        </a>
+
+          <a
+          name='profile/configuration'
+          href='{% url "Booklary-profile-config" %}'
+            class="list-group-item list-group-item-action list-group-item-info"
+          >
+              Configuración
+        </a>
+{% if user.is_superuser %}
+        <a
+        name='admin_post/posts/'
+        href='{% url "admin_post" %}'
+        class="list-group-item list-group-item-action list-group-item-warning"
+        >
+            ADMIN
+      </a>
+        {% endif %}
+        
+          <a
+          name='logout'
+            class="list-group-item list-group-item-action list-group-item-info"
+            href='{% url "logout" %}'
+          >
+            Salir
+        </a>
+        </ul>
+        
+        <p class="text-muted" style="font-size: 13px;"> <strong>Fecha Cuenta:</strong> {{user.date_joined}}</p>
+      </div>
+    </div>
+    {% block content-profile %}
+    {% endblock %}
+  </div>
+
+
+  
+
+</div>
+
+
+
+{% endblock content %}

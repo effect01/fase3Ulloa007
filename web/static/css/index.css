@@ -1,0 +1,281 @@
+
+/*  INDEX, NAV, HOME */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-align: center;
+}
+.avatarNav{
+  height: 35px;
+  width: 35px;
+  margin: 0;
+  border-radius: 50%;
+  display: inline;
+}
+ul.navbar-nav li.nav-item {
+  padding-top: 7px;
+  padding-bottom: 0;
+}
+ul.navbar-nav li.nav-item.dropdown {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#admin_post h4{
+  
+position: absolute;
+}
+/* #e0a800 main color */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.App {
+  text-align: center;
+}
+html,
+body {
+  width: 100%;
+  
+  overflow-x: hidden;
+}
+
+.open {
+  height: 300px;
+}
+/* nav */
+.nav,
+nav {
+  z-index: 100;
+  width: 100%;
+}
+
+nav div.input-group {
+  width: 29vh;
+  margin: 2px;
+}
+nav div.input-group.active {
+  width: 70vw;
+
+  margin: auto;
+  margin-top: 10px;
+}
+.row {
+  justify-content: center;
+}
+ul.navbar-nav {
+  width: auto;
+  display: flex;
+  height: 10%;
+  margin: auto;
+  margin-right: 0;
+}
+.loginBg {
+  width: 100vw;
+  height: 93vh;
+  background-color: rgb(255, 248, 240);
+  display: flex;
+}
+img.avatarNav {
+  height: 35px;
+  width: 35px;
+  margin: 0;
+  border-radius: 50%;
+  display: inline;
+}
+
+
+
+#sup-right{
+  
+  transition: all 1s ease-in-out;
+  position: absolute;
+  top: 32%;
+  margin-left: 40px;
+  right: 29vw;
+}
+
+#sup-right > div{
+ right: 0;
+}
+#sup-right > h1{
+  font-size: 80px;
+  text-shadow: black 0px 4px 2px;
+  transition: all 1s ease-in-out;
+  color: orange;
+}
+
+div.img-fluid {
+  
+  transition: all 2s ease-in-out;
+
+  height: 70vh;
+  background-color: #61a9fb65;
+  width: 100%;
+  background-repeat: no-repeat;
+  justify-self: center;
+  margin: auto;
+}
+#banner {
+justify-content: center;
+align-items: center;
+background:url(' https://i.ytimg.com/vi/FlSX749W9L0/maxresdefault.jpg');
+background-position-x: 240px;
+
+}
+
+div.media {
+  height: auto;
+  text-align: left;
+  padding: 40px;
+  background-color: #f5c242;
+  
+}
+
+
+#circle {
+  background-color:rgba(233, 188, 41, 0.898);
+  height: 250px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  width:250px;
+
+  padding: auto;
+  position: absolute;
+  top: 48%;
+  left: 16%;
+}
+#circle p {
+  margin: 11%;
+  padding: 4%;
+  font-size: 22px;
+  justify-self: center;
+  pointer-events: none;
+  color: white;
+}
+ #sup-right:hover > h1{
+
+  transform: scale(1.5);
+}
+.userview{
+  display: none;
+}
+.userview.desactive{
+  display: contents;
+}
+
+
+#mapid { height: 280px; }
+.h100{
+  height: 300px;
+  top: 1%;
+
+
+}
+.ml2 {
+  
+  font-weight: 100;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 3.5em;
+    
+
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+.navsCol > a {
+  padding: 5px;
+
+  height: 100%;
+  width: 100%;
+}
+/* arreglar banner su banner  */
+
+
+section.main {
+  align-content: center;
+  height: 100%;
+  background-color: rgb(230, 227, 223);
+}
+
+section.main > div {
+  padding: 6vh;
+
+  padding-left: 16vh;
+  height: 100%;
+  justify-content: center;
+  background: rgb(255, 251, 246);
+}
+
+section.main div.card {
+  margin: 40px;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  width: 20px;
+}
+
+div.card-body > img {
+  width: auto;
+  height: 70px;
+}
+
+div.col {
+  display: block;
+}
+
+div.col > li > a {
+  color: #61a9fb;
+}
+div.col > li {
+  list-style-type: none;
+}
+
+div.carousel > div > div {
+  height: 90vh;
+}
+div.carousel > div > img {
+  align-content: center;
+}
+
+footer > div {
+  width: 100%;
+  padding: 6vw;
+  text-align: left;
+
+  margin: 0;
+}
+
+footer {
+  height: auto;
+  width: auto;
+  background-color: rgb(41, 50, 70);
+  grid-column: 2;
+  display: grid;
+}
+footer div.col,
+footer > div > p {
+  color: white;
+}
+footer div.col-4 {
+  background-color: white;
+  padding: 30px;
+  border: black 33px 10px;
+  box-shadow: black 0px 3px 10px;
+}
+footer > div.col-4 > div {
+  margin: 10px;
+}
+
+.iconRed > img {
+  margin: 5px;
+}

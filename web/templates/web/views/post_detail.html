@@ -1,0 +1,231 @@
+{% extends "web/index.html" %} {% block content %}
+{% load crispy_forms_tags %}
+<div>
+  
+    <div
+    class="card-body w-75 d-flex m-auto"
+    style="display: flex; align-content: center; justify-content: center"
+    >
+    
+    
+    
+    <div class="image-item m-4" style="width: fit-content">
+        <div class="image-container d-flex flex-column">
+            <a >
+                <img
+                src="{{post.image}}"
+                width="300"
+                height="500"
+                />
+            </a>
+        </div>
+    </div>
+    
+    <p>
+        
+        {{ post.addMyLibrary }}
+    </p>
+    
+    <div class="info-item p-3 w-25" style="text-align: left">
+        <h3>{{object.title}}</h3>
+        <div id="content-lib-body-detail" class="" style="text-align: left">
+            <div
+            class="communityRating__starsWrapper communityRating__starsWrapper--medium"
+            data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0"
+            >
+            <div
+            class="communityRating__stars communityRating__stars--medium"
+            id='{{ post.title }}Star'
+            aria-label="Rated {{ post.pointMedia }} of 5"
+            data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0.0"
+            ></div>
+        </div>
+        <script>
+            document.getElementById(
+            `{{post.title}}Star`
+            ).style.width = `{{post.pointMediaPercent}}%`;
+        </script>
+        
+        <div id="add-info-lib-body">
+            <p>  {{ post.pointMedia }} </p>
+        </div>
+        
+        <div class="mt-2">
+            <p>Author: {{object.author}}·</p>
+            <p>Publicado: {{object.year}}</p>
+            <p>Pais: {{object.country}}</p>
+            <p>Genero: {% for gen in post.genre.all %} {{gen}}.  {%endfor%} </p>
+        </div>
+    </div>
+</div>
+<div class="pay-info-item card h-75 w-25">
+    <div class="card-body">
+        {% if not post.price == 0 %}
+        <div class="pay-info-item-price">${{object.price}}</div>
+        <div class="pay-info-more">
+            Podras acceder siempre y donde quieras !
+        </div>
+        {% else %}
+        <div class="pay-info-item-price">GRATIS !</div>
+        
+        <div class="pay-info-more">
+            Tendras acceso solo por se parte de booklary!
+        </div>
+        {% endif %}
+        
+        
+        <form onsubmit="return confirm('Estas Seguro que quieres obtener este libro ?');"  id='normalinormali'method="POST">
+            <div >
+                
+                {% csrf_token %}
+                
+                <input id='nombre_persona' type='Submit' class="btn btn-warning m-2" value="Agregar!">
+                
+            </div> </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="card w-50 m-auto">
+    <div class="card-body text-body" id="description-item">
+        <h3>Descripción</h3>
+        <p>
+            {{ object.content}}
+        </p>
+    </div>
+</div>
+
+<div id="review-item" class="card-body">
+    
+    <h3>Puntuaciones</h3>
+    {% if post.star_set.all  %}
+    <a href="">Dar tu puntuacion</a>
+    
+    <div class="m-3 p-3 font-weight-normal h4" >
+     
+    {% for star in post.star_set.all  %}
+    <div class="m-1 justify-content-center d-flex">
+        <p>    <strong>
+        
+            {{star.user.username.capitalize }} 
+        </strong> le a dado un {{star.vote}}
+    
+
+        </p>
+
+<div class="p-1">
+    
+    <div
+    class="communityRating__starsWrapper communityRating__starsWrapper--medium"
+    data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0"
+    >
+    <div
+    class="communityRating__stars communityRating__stars--medium"
+    id='vote_star_{{star.user_id}}'
+    aria-label="Rated {{ star.vote }} of 5"
+    data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0.0"
+    ></div>
+
+</div>
+    
+</div>
+ 
+</div>
+
+
+
+</div>  <script>
+    let vote= '{{star.vote}}' * 20 ; 
+    document.getElementById(
+                `vote_star_{{star.user_id}}`
+                ).style.width = vote+'%'; 
+       </script>
+    {% endfor  %}
+
+        <a href="">ver todas las puntuaciones</a>
+    {% else %}
+        <div class="card-body p-5 w-50 m-auto">
+    
+            
+            <h2 class="text-muted">No hay Puntuaciones aun 🙄</h2>
+        </div>
+    {% endif %}
+    
+</div>
+
+
+</div>
+<div id="comment-item" class="card-body w-75" style="margin: auto; margin-bottom: 50px;">
+    
+    <div class="form-group m-auto">
+        <form  name='title' id="comment"  method="POST">
+            {% csrf_token %}
+            <div  class='m-auto w-75 text-right'>
+                
+                
+                {{ form|crispy  }}
+                <button  class="btn btn-info ">Enviar</button>
+                
+            </div>
+            
+            
+        </form>
+        
+    </div>
+    <h3 class="m-3">Comentarios</h3>
+    
+    
+    <br/>
+    
+    {% if post.comments.all  %}
+    {% for comment in post.comments.all  %}
+    <div class="card-body row  w-75 row  m-auto " >
+        <div class="profile_info_commment w-25 p-3  ">
+            
+            <div class="m-auto" style='width: 80px; height: 80px' >
+                <img class='w-100 h-100 rounded-circle'src="{{comment.user.profile.image.url}}" alt="" >
+                
+            </div>
+            
+            <h5>
+                {{comment.user.username.capitalize}}
+            </h5>
+            <p style="font-size: 12px">
+                <strong>Puntos</strong>: {{comment.user.profile.points}}</p>
+            </div>
+            <div class="comment_comment w-75 p-3">
+                <div class=" text-left p-4 " style='min-height: 50% ;background: rgb(243, 243, 243); border-radius: 25px; '>
+                    
+                    {{comment.comment}}
+                </div>
+                
+                <p class="text-muted" style="font-size: 12px;"> {{comment.created_on }}</p>
+            </div>
+        </div>
+        
+        {% endfor %}
+        <a href="/">Ver más comentarios :)</a>
+        {% else %}
+        <div class="card p-5">
+            
+            <h2 class="text-muted">No hay comentarios aun 🤨</h2>
+            
+        </div>
+        
+        {% endif %}
+        
+        
+        
+    </div>
+    <style>
+        @media (max-width: 1026px ) {
+        #comment-item .w-75 ,#comment-item .w-25{
+          width: 100%;
+        }}
+        
+      </style>
+</div>
+</div>
+</div>
+{% endblock content %}

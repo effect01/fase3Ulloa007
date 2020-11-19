@@ -1,0 +1,80 @@
+
+{% extends "web/views/admin_post.html" %}
+
+{% block profile-cont %}
+
+{% for post in posts %}
+<div class="card m-4 " >
+  <div id='admin_post'class="card-body d-flex " style="justify-content: center;">
+   
+    <a href='{{post.get_absolute_url}}'    class=" d-flex flex-column justify-content-center w-50"
+    style="background: url( ' {{post.image}} ');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+    
+    ">
+    <h4 
+    
+    style="   
+    top: 34%;
+    left: 20%;
+    width: 400px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+
+    ">{{post.title.upper|slice:"0:24" }}</h4>
+          </a>
+    <a class="btn btn-outline-danger ml-2" href='{{post.get_detele_url}}'> Eliminar</a>
+    <a class="btn btn-outline-info ml-2" href='{{post.get_update_url}}'> Editar</a>
+  </div>
+</div>
+{% endfor %}
+
+
+
+<div >
+  {% if is_paginated %}
+ 
+
+  <nav class="" aria-label="..." >
+      <ul class="pagination m-auto" style="width: fit-content;">
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="page-link active" href="?page={{page_obj.previous_page_number}}" tabindex="-1" >Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+        </li>
+
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+      
+          {% if page_obj.number == num %}
+          <li class="page-item active" >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+
+          {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3' %}
+          <li class="page-item " >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+          {% endif %}
+        {% endfor %}
+
+
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+           <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+         </li>
+
+      {% endif %}
+    </ul>
+  </nav>
+  
+  {% endif %}
+{% endblock profile-cont %}

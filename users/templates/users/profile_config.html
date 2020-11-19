@@ -1,0 +1,40 @@
+
+   {% extends "users/profile.html" %}
+   {% load crispy_forms_tags %}
+   {% block content-profile %}
+   
+   
+   
+   <div id="content-profile" class="col-8">
+
+      <div style='text-align: left; padding: 50px; '>
+    
+    <form method="POST" enctype="multipart/form-data">
+      <h3>INFORMACIÓN CUENTA</h3>
+{% csrf_token %}
+<fieldset class="form-group">
+  <legend class="border-bottom mb-4"></legend>
+  {{u_form|crispy}}
+</fieldset>
+
+
+<h3>INFORMACIÓN PERFIL</h3>
+<fieldset class="form-group">
+  
+  <legend class="border-bottom mb-4"></legend>
+  {{p_form|crispy}}
+</fieldset>
+  
+<button type="submit" class="btn btn-info" > Actualizar</button>
+
+
+    </form>
+  
+
+      </div>
+
+
+
+            </div>
+
+{% endblock content-profile %}

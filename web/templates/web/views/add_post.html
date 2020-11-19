@@ -1,0 +1,19 @@
+
+{% extends "web/views/admin_post.html" %}
+{% load crispy_forms_tags %}
+{% block profile-cont %}
+
+<div id="content-profile" class="col-8 mb-3 pb-5 m-auto" >
+   
+    <br/>
+    <form action="" method="POST">
+        
+{% csrf_token %}
+    <div class="form-group w-100 m-auto">
+        {{form|crispy}}
+    <button class="btn btn-info">Agregar</button>
+
+    </div>
+</form>
+    
+{% endblock profile-cont %}

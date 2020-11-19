@@ -1,0 +1,100 @@
+
+
+
+{% extends "users/profile.html" %}
+{% block content-profile %}
+
+<div id="content-profile" class="col-8 ">
+
+    <div class="additional-info-profile w-75 h-auto">
+      <div class="row" id="point-profile">
+        <div class="col m-auto p-4">
+          
+          <div id="content-lib-body" class="m-5 h-auto" >
+          
+<div class="d-flex w-auto justify-content-center">
+<div
+class="communityRating__starsWrapper communityRating__starsWrapper--medium "
+data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0"
+>
+<div
+  class="communityRating__stars communityRating__stars--medium"
+  
+  id='{{user.username}}Star'
+  aria-label="Rated {{user.profile.pointProfileMedia}} of 5"
+  data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0.0"
+></div>
+
+</div>
+<h3 style='padding-top: 3px;'>
+{{user.profile.pointProfileMedia}}
+</h3>
+</div>
+            
+
+            <p class=" align-text-center text-muted ">
+              votos {{user.profile.pointProfileCount}}
+            </p>
+
+          </div>
+<div class="text-capitalize text-info text-justify pl-5"> 
+<!--  <p> <strong>Cumple:</strong></p> -->
+    {% if user.first_name %}
+    <p> <strong>Nombre: </strong>{{user.first_name}} {{user.last_name}} </p>
+    {% endif %}
+    {% if user.profile.countryProfile %}
+    <p> <strong>Pais:</strong> {{user.profile.countryProfile}}</p>
+    {% endif %}
+    {% if user.profile.dateBirth %}
+    <p> <strong>Cumple:</strong>  {{user.profile.dateBirth|date:'d-M'}} </p>
+    {% endif %}
+  
+
+    
+
+</div>
+        </div>
+        <div class="col m-auto p-4" style="font-size: 50px;">
+          {{user.profile.points}} puntos </div>
+      </div>
+    </div>
+    
+    <script> document.getElementById(`{{ user.username }}Star`).style.width = '{{user.profile.pointProfileMediaPercent}}%' </script>
+    <div class="u-library-profile w-75">
+      <div class="p-3 d-flex">
+        <h3>Mi Biblioteca</h3>
+        <!-- <p class="m-auto p-1">buscar</p> -->
+  
+   
+      </div>    
+      
+   
+      {% if user.profile.ex1 %}
+    <div class='profile-library'> 
+        {% for post in  user.userbook_set.all %}
+        <div class="card" style='  background-color: #9b9b9a12;  width: fit-content;
+        margin: 7px;'>
+          <div class="card-body">
+            <img src="{{post.post.image}}" style='width: 200px;height:300px;' alt="">
+            <a href="{{post.post.get_absolute_url}}" style="color: #e15f12">
+                <h4>   {{post.post.title.capitalize|slice:"0:25"}} </h4>
+            </a>
+          </div>
+        </div>
+       
+          
+        {% endfor %} 
+
+
+      </div>
+        
+      {% else %}
+      <h2 class="text-muted " style='text-align: center'> NO TIENES NIUN LIBRO AUN :(</h2>
+      {% endif %}
+
+    </div>
+  </div>
+
+
+
+  {% endblock content-profile  %}

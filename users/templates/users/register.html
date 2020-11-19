@@ -1,0 +1,104 @@
+
+{% extends "web/index.html" %}
+{% block title %}
+    Create User - {{ block.super }}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="loginBg">
+
+  <div class="card " style="width: 700px; margin: 60px auto auto">
+    <div class="card-body" style="margin: 20px">
+        <div class="container">
+            <div class="row" style="display: flex; margin: auto">
+                <div class="col-sm col"   id='botonLog'>
+                  <a class='text-muted' href="{% url 'login' %}" >
+
+                    <h4>INICIAR SESIÓN</h4>
+
+                  </a>
+                
+                
+                </div>
+                
+                <div 
+                class="col-sm col" 
+                 id='botonReg'>
+                <a> 
+                  <h4>
+                  REGISTRATE
+                </h4>
+                   </a>
+            </div>
+            
+        </div>
+    </div>
+
+    
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        {{form|crispy}}
+      </fieldset>
+      <div class="form-group">
+        
+        <input type="submit" class="form-control" value= 'Registrate ahora !💕' /> 
+      </div>
+    </form>
+
+   
+
+
+
+
+      <h5>o inicia con </h5>
+      <div
+      style="
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      width: 10rem;
+      margin: auto;
+      "
+      >
+      <img
+      id="GOOGLE-login"
+      src="https://cdn.windowsreport.com/wp-content/uploads/2016/10/Google-icon.jpg"
+      style="
+      width: 30px;
+      height: 30px;
+      color: black;
+      margin-top: auto;
+      cursor: pointer;
+      "
+      /><img
+      id="FACEBOOK-login"
+      src="https://woocommerce.com/wp-content/plugins/wccom-facebook-product-header/client/assets/images/facebook-icon.png"
+      style="
+      width: 30px;
+      height: 30px;
+      color: black;
+      margin-top: auto;
+      cursor: pointer;
+      "
+      /><img
+      id="TWITTER-login"
+      src="https://blog.bitmex.com/wp-content/uploads/2018/10/kisspng-social-media-iphone-organization-logo-twitter-5abe3024502f30.2043853815224136043284.jpg"
+      style="
+      width: 30px;
+      height: 30px;
+      color: black;
+      margin-top: auto;
+      cursor: pointer;
+      "
+      />
+      </div>
+ 
+</div> </div>
+</div>  </div>
+
+{% endblock content %}

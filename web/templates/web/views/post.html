@@ -1,0 +1,62 @@
+{% extends "web/index.html" %}
+{% block content %}
+
+ 
+
+
+<div class="d-flex">
+    <div class="m-3 card " style="min-width:360px" >
+     
+        <div id="category-browse-filters">
+          <div class="card-body">
+          <form method='GET'  >
+            <h4>Filtros</h4>
+
+                
+            <div class="p-1 m-2">
+          
+
+           <select name='gen' class="form-control" id='search-gen'>
+
+
+                <option value='' selected>Genero...</option>
+                
+{% for ge in gen %}
+<option value={{ge.pk}}> {{ge.nameGen}} </option>
+{% endfor %}
+              </select>           </div>   
+            <div class="p-1 m-2">
+          
+                        <select name='author' class="form-control" id='search-author'>
+                        <option value='' selected>Autor...</option>
+                
+{% for au in author %}
+<option value={{au.pk}}> {{au}} </option>
+{% endfor %}
+              </select>
+            </div>
+
+            <div class="p-1 m-2 d-flex">
+              <button type="submit" class="ml-auto mr-1 btn btn-dark">
+                Buscar
+              </button>
+            </div>
+      </form>
+          </div>
+        </div>
+    </div>
+
+
+  <div class="card-body ">
+<div class="body-lib d-flex row">
+{% block posts %}
+
+{% endblock posts %}
+
+
+
+
+
+
+  </div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "web/index.html" %}
+{% block content %}
+<div id="about"> 
+  {% load static %}
+    <header>
+      <img
+        src='{% static  "public/banner2.jpg" %}'
+        class="img-fluid"
+        alt="Responsive image"
+      />
+      
+      <h2>CONOCENOS</h2>
+    </header>
+    <div class="main">
+
+        <div>  
+        <h3>Nuestro objectivo </h3>
+        <p>
+           Nuestro objetivo es dar la posibilidad de apoyar tanto a escritores, como lectores, y conseguir una eficiencia en costos.
+          Actuamos como mediadores, donde nos proponemos tener los mejores precios online
+
+        </p>
+        <h3> Como logramos nuestro objectivo ? </h3>
+        <p>
+          Primero que nada, tenemos diversos tipos de suscripción y pagos, que se ajustan a los requisitos del lector, y por otro lado editores y escritores tienen diversos tipos de tratos, para obtener ganancias, y publicitar sus libros. 
+        </p>    
+        
+   
+        
+    </div>
+
+    </div>
+  </div>
+
+  
+  {% endblock content %}

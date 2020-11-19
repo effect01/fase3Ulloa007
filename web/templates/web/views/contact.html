@@ -1,0 +1,67 @@
+{% extends "web/index.html" %}
+
+
+
+  {% block content %}
+<div id='contact'>
+
+ 
+<header>
+      
+    {% load static %}
+      <img
+        src='{% static  "public/banner2.jpg" %}'
+        class="img-fluid"
+        alt="Responsive image"
+      />
+
+      <h2>CONTACTANOS</h2>
+    </header>
+    <div class="main">
+      <div>
+        <h3>Envianos un mensaje</h3>
+
+        <!--  FORMULARIO -->
+        <form>
+          <div class="form-group">
+            <input
+              type="text"
+              name='email1'
+              class="form-control"
+              onchange='onchangg()'
+              placeholder="email@example.com"
+            /><div class="invalid-feedback">
+              el correo tiene un formato invalido
+              </div>
+          
+              <div class="form-group">
+            <textarea id=""
+            class="form-control w-100" style="height: 300px">
+
+
+              </textarea></div>
+
+          </div>
+          <button class="btn btn-warning">Enviar📩</button>
+        </form>
+
+        <h3>Donde encontrarnos ?</h3>
+        <p>
+          Direccion : 1232# Calle idontknow bodega 5, Santiago, Chile.
+        </p>
+    
+            
+        <div id="mapid"></div>
+</div>
+
+
+    </div>
+   {% load static %}
+    <script src='{% static  "JS/Component/mapa.js" %}'></script>
+
+
+
+  
+  </div>
+
+  {% endblock content %}

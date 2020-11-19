@@ -1,0 +1,184 @@
+{% extends "web/index.html" %}
+{% block content %}
+
+
+<div class="d-flex">
+    <div class="m-3 card " style="min-width:360px" >
+      <form action="submit">
+        <div id="category-browse-filters">
+          <div class="card-body">
+            <div class="p-1 m-2">
+              <h4>Busca especifica</h4>
+              <input
+                name="keyword"
+                autocomplete="current-password"
+                placeholder="Palabra Clave"
+                required=""
+                onchange="onchangg(this)"
+                type="password"
+                class="form-control form-control"
+              />
+              <div class="invalid-feedback"></div>
+            </div>
+            <h4>Filtros</h4>
+            <div class="p-1 m-2">
+              <select class="form-control" placeholder="hola">
+                <option selected>Categorias...</option>
+                
+
+                {% for gen in set_genbooks.all %}
+                    <option>algo</option>
+                    <option>Conocimiento</option>
+                    <option>Romance</option>
+                    <option>Fantasia</option>
+                {% endfor %}
+
+              </select>
+            </div>
+          
+            <div class="p-1 m-2">
+              <input
+                name="author"
+                autocomplete="current-password"
+                placeholder="Author"
+                required=""
+                type="password"
+                class="form-control form-control"
+              />
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="p-1 m-2 d-flex">
+                <a href="{% url 'post-gen-author' 3 6  %}"> ir </a>
+              <button type="button" class="ml-auto mr-1 btn btn-dark">
+                Buscar
+              </button>
+            </div>
+      
+
+
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="w-100"> 
+        
+    <div class="d-flex m-auto justify-content-center pt-5 align-content-center">
+
+        <h3 style="margin-top:auto" >  Del autor : {{ posts.first.author }}  ({{page_obj.paginator.count}})
+        </h3>
+    </div>
+
+  <div class="card-body ">
+<div class="body-lib d-flex row">
+
+
+
+{% for post in posts %}
+<div class="card m-4" style="width: 400px; height:fit-content;">
+  <div class="card-body">
+    <h4>{{post.title|slice:"0:26" }}</h4>
+    <div
+      class="image-container d-flex flex-column justify-content-center"
+    >
+      <a href='{{post.get_absolute_url}}' >
+        <img
+          src="{{post.image}}"
+          alt=""
+          width="300"
+          height="300"
+        />
+      </a>
+    </div>
+    <div id="content-post-preview" class="" style="text-align: left">
+      <div
+        class="communityRating__starsWrapper communityRating__starsWrapper--medium"
+        data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0"
+      >
+      <div
+          class="communityRating__stars communityRating__stars--medium"
+          id='{{ post.title }}Star'
+          aria-label="Rated {{ post.pointMedia }} of 5"
+          data-reactid=".9v338zkyrk.$33cb403f881b187bc0359f4cf718c458701808d1.1.0.1.2.0.$0.0.0.0"
+        ></div>
+        
+      </div>
+      <script> document.getElementById(`{{post.title}}Star`).style.width = `{{post.pointMediaPercent}}%` </script>
+   
+      <div id="add-info-lib-body">
+  
+        <p>
+          {{ post.pointMedia }} · {{ post.pointCount }} Puntuaciones · Author:
+         <a href="{% url 'post-author' post.author.pk %}">
+             <strong> {{post.author}} </strong> 
+
+         </a> 
+         · Publicado: {{post.publisher}} {{post.year}}· Pais
+          Origen: {{post.country}}
+        </p>
+      </div>
+      <p>
+        <strong>Descripcion: </strong>
+        {{post.previewContent}}
+      </p>
+      <legend class="border-bottom mb-4"></legend>
+      <a href='{{post.get_absolute_url}}' type="button" class="pl-auto m-1 btn btn-dark">
+        Ver más
+      </a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+
+
+
+<div >
+  {% if is_paginated %}
+ 
+
+  <nav class="" aria-label="..." >
+      <ul class="pagination m-auto" style="width: fit-content;">
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="page-link active" href="?page={{page_obj.previous_page_number}}" tabindex="-1" >Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+        </li>
+
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+      
+          {% if page_obj.number == num %}
+          <li class="page-item active" >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+
+          {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3' %}
+          <li class="page-item " >
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+          </li>
+          {% endif %}
+        {% endfor %}
+
+
+        {% if page_obj.has_next %}
+     <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        </li>
+
+        {% endif %}
+      </ul>
+    </nav>
+
+    {% endif %}
+  </div>
+</div>
+
+
+  </div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "web/index.html" %} 
+
+{% load crispy_forms_tags %}
+{% block title %} added Comment{% endblock %}
+{% block content %}
+<h1>Add Comment</h1>
+<br/>
+
+<div class="form-group w-25 m-auto">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|crispy  }}
+
+        <button  href=''class="btn btn-info">Enviar</button
+            >
+    </form>
+</div>
+
+
+{% endblock content %}
