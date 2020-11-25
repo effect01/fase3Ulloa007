@@ -89,13 +89,14 @@
     <li class="nav-item" >
     <a class="nav-link" name='home' href="{% url 'Booklary-home' %}" >Inicio <span class="sr-only">(current)</span></a>
     </li>
+    {% if user.is_authenticated %}
     <li class="nav-item ">
 
     <a class="nav-link" name='library'  href="{% url 'Booklary-library' %}" >Libreria</a>
 
 
     </li>
-   
+   {% endif %}
     <li class="nav-item">
     <a class="nav-link"  name='about'  href="{% url 'Booklary-about' %}"  >Conocenos </a>
     </li>

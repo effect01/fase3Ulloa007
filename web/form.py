@@ -21,15 +21,3 @@ class CreatePostForm(forms.ModelForm):
 
 
 
-class addBookForm(forms.ModelForm):
-    model = UserBook
-    fields = 'user'
-    class Meta:
-        model = UserBook
-        fields = {'user': forms.ChoiceField() }
-
-
-class searchhBookForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = { 'author': forms.ChoiceField() , 'genre': forms.ChoiceField() }

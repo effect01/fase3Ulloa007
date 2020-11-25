@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView , FormMixin , UpdateView, Delet
 from users.models import Profile
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import *
-from .form import CommentForm , addBookForm , CreatePostForm
+from .form import CommentForm  , CreatePostForm
 from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.decorators import login_required
 from .serialize import *
@@ -72,7 +72,7 @@ class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixi
         if self.request.user.is_superuser:
             return True
         return False
-
+        
 class PostListView(ListView):
     model = Post
     template_name = 'web/views/postList.html'
@@ -126,7 +126,6 @@ class PostDetailView(FormMixin,DetailView):
                 return self.form_invalid(form)
         except Exception as e:
             try:
-          
                 post = Post.objects.filter(id = self.kwargs['pk'] ).first()
                 post.userbook_set.create(user_id= self.request.user.id)
                 post.save()
@@ -134,7 +133,6 @@ class PostDetailView(FormMixin,DetailView):
             except Exception as e:
                 messages.warning(self.request, f'error : probablemente ya tienes este libro 🤣')
             return redirect('Booklary-profile')
-    
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         form.instance.user = self.request.user
