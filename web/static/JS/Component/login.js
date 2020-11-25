@@ -71,7 +71,8 @@ const fixedLogin = () => {
     div_id_year: 'Años en que se publico',
     div_id_publisher: "Publicador de la edicion",
     div_id_country: "Pais",
-    div_id_base_price: "Precio base"
+    div_id_base_price: "Precio base",
+    div_id_nameGen: 'Nombre'
 
   };
 

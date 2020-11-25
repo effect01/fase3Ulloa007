@@ -40,6 +40,23 @@ def library(request):
     }
     return render(request, 'web/views/post.html', context)
 
+
+class AuthorCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
+    model =Author
+    template_name = 'web/views/add_genero.html'
+    fields = '__all__'
+    success_message = "El Genero %(last_name)s se ah creado con exito"
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class GeneroCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
+    model =GenBook
+    template_name = 'web/views/add_author.html'
+    fields = '__all__'
+    success_message = "El Author %(last_name)s se ah creado con exito"
+    def form_valid(self, form):
+        return super().form_valid(form)
+
 class PostCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
     model =Post
     template_name = 'web/views/add_post.html'
@@ -140,7 +157,7 @@ class PostDetailView(FormMixin,DetailView):
         return super().form_valid(form)
 
         
-class PostAdminDetailView(ListView):
+class PostAdminListView(ListView):
     LOGIN_REQUIRED = True
     model = Post
     template_name = 'web/views/admin_post_admin.html'
@@ -149,6 +166,18 @@ class PostAdminDetailView(ListView):
     paginate_by= 5
 
 
+class AuthorAdminListView(ListView):
+    LOGIN_REQUIRED = True
+    model = Author
+    template_name = 'web/views/admin_author.html'
+    context_object_name = 'posts'
+    paginate_by= 5
+class GeneroAdminListView(ListView):
+    LOGIN_REQUIRED = True
+    model = GenBook
+    template_name = 'web/views/admin_genero.html'
+    context_object_name = 'posts'
+    paginate_by= 5
 class AddCommentForm(CreateView):
     model = Comment
     form_class = CommentForm 
