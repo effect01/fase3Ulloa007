@@ -99,8 +99,9 @@
 <div id="review-item" class="card-body">
     
     <h3>Puntuaciones</h3>
+    <a href="">Da tu puntuacion</a>
     {% if post.star_set.all  %}
-    <a href="">Dar tu puntuacion</a>
+
     
     <div class="m-3 p-3 font-weight-normal h4" >
      
@@ -109,7 +110,7 @@
         <p>    <strong>
         
             {{star.user.username.capitalize }} 
-        </strong> le a dado un {{star.vote}}
+        </strong> le a dado un {{star.vote}}/5
     
 
         </p>

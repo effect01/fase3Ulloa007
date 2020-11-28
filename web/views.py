@@ -4,7 +4,7 @@ from django.shortcuts import render , get_object_or_404,redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView , FormView  
 from django.http import HttpResponse, HttpResponseForbidden
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView , FormMixin , UpdateView, DeleteView
@@ -51,11 +51,9 @@ class AuthorCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
 
 class GeneroCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
     model =GenBook
-    template_name = 'web/views/add_author.html'
+    template_name = 'web/views/add_genero.html'
     fields = '__all__'
-    success_message = "El Author %(last_name)s se ah creado con exito"
-    def form_valid(self, form):
-        return super().form_valid(form)
+    success_message = "El Genero %(nameGen)s se ah creado con exito"
 
 class PostCreateView(SuccessMessageMixin, LoginRequiredMixin,CreateView):
     model =Post
@@ -84,7 +82,7 @@ class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixi
     model = Post
     template_name = 'web/views/delete_post.html'
     success_url = '/'
-    success_message = "El post<libro> %(title)s se ah eliminado con exito"
+    success_message = "El post<libro> %(title)s se ha eliminado con exito"
     def test_func(self):
         if self.request.user.is_superuser:
             return True
@@ -157,8 +155,9 @@ class PostDetailView(FormMixin,DetailView):
         return super().form_valid(form)
 
         
-class PostAdminListView(ListView):
+class PostAdminListView(ListView, PermissionRequiredMixin):
     LOGIN_REQUIRED = True
+    permission_required = 'is_staff'
     model = Post
     template_name = 'web/views/admin_post_admin.html'
     context_object_name = 'posts'
@@ -172,12 +171,16 @@ class AuthorAdminListView(ListView):
     template_name = 'web/views/admin_author.html'
     context_object_name = 'posts'
     paginate_by= 5
+
+    
 class GeneroAdminListView(ListView):
     LOGIN_REQUIRED = True
     model = GenBook
     template_name = 'web/views/admin_genero.html'
     context_object_name = 'posts'
     paginate_by= 5
+
+
 class AddCommentForm(CreateView):
     model = Comment
     form_class = CommentForm 
@@ -195,3 +198,45 @@ class GenViewSet(viewsets.ModelViewSet):
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+
+class GeneroDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = GenBook
+    template_name = 'web/views/delete_genero.html'
+    success_url = '/'
+    success_message = "El Genero %(nameGen)s se ha eliminado con exito"
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+class GeneroUpdateView( SuccessMessageMixin , LoginRequiredMixin, UserPassesTestMixin, UpdateView ):
+    model = GenBook
+    fields = '__all__'
+    template_name = 'web/views/add_comment.html'
+    success_message = "El Author %(nameGen)s se ah actualizado"
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+
+class AuthorUpdateView( SuccessMessageMixin , LoginRequiredMixin, UserPassesTestMixin, UpdateView ):
+    model = Author
+    fields = '__all__'
+    template_name = 'web/views/add_author.html'
+    success_message = "El Author %(last_name)s se ah actualizado"
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+class AuthorDeleteView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Author
+    template_name = 'web/views/delete_genero.html'
+    success_url = '/'
+    success_message = "El Author %(last_name)s se ha eliminado con exito"
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False

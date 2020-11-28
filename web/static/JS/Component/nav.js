@@ -57,10 +57,8 @@ const profileNavA = () => {
 
 window.addEventListener('load', () => {
     navLi();
-    collapserFix();
     profileNavA();
-    
-    document.getElementById('category-browse-filters').innerHtml = "<p> asdasda </p>";
+
     // UserButton();
     // navLi();
 });

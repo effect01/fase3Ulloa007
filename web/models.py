@@ -74,15 +74,23 @@ class Comment(models.Model):
         return "Comenterio de %s por: %s" % ( self.post , self.user )
     class Meta:
         ordering = ['-created_on']
-    def get_absolute_url(self):
-        return reverse('post-detail', args=[str(self.post.id)])
-
+    def get_update_url(self):
+        return reverse('comment-update', args=[str(self.id)])
+    def get_detele_url(self):
+        return reverse('comment-delete', args=[str(self.id)])
 
 
 class GenBook(models.Model):
     nameGen = models.CharField(max_length=65)
     def __str__(self):
         return self.nameGen
+    def get_update_url(self):
+        return reverse('genero-update', args=[str(self.id)])
+    def get_detele_url(self):
+        return reverse('genero-delete', args=[str(self.id)])
+    def get_absolute_url(self):
+        return reverse('admin_genero')
+        
 
 class Author(models.Model):
     first_name = models.CharField(max_length=65)
@@ -91,7 +99,12 @@ class Author(models.Model):
         ordering = ['last_name', 'first_name']
     def __str__(self):
         return "%s %s" % ( self.first_name , self.last_name )
-
+    def get_absolute_url(self):
+        return reverse('admin_author')
+    def get_update_url(self):
+        return reverse('author-update', args=[str(self.id)])
+    def get_detele_url(self):
+        return reverse('author-delete', args=[str(self.id)])
 
 class UserBook(models.Model):
     post = models.ForeignKey('Post' , on_delete=models.CASCADE)
