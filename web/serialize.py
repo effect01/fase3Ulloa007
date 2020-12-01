@@ -1,4 +1,4 @@
-from .models import GenBook
+from .models import Author, GenBook
 from rest_framework import serializers
 
 
@@ -9,5 +9,5 @@ class GenSerializer(serializers.ModelSerializer):
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GenBook
+        model = Author
         fields = '__all__'
